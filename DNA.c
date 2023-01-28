@@ -32,6 +32,14 @@ void DrawLineWithMarkers(int x, int y, int marker, int ends,char symbols[]){
     }
 }
 
+void RendertRNA(int x, int y){
+    Bdisp_DrawLineVRAM(x-5,y,x-5,y+1);
+    Bdisp_DrawLineVRAM(x,y,x,y+2);
+    Bdisp_DrawLineVRAM(x+5,y,x+5,y+1);
+    Bdisp_DrawLineVRAM(x-5,y+1,x+5,y+1);
+
+}
+
 //****************************************************************************
 //  AddIn_main (Sample program main function)
 //
@@ -58,6 +66,12 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
         DrawLineWithMarkers(12,2,1,5, dna);
         DrawLineWithMarkers(12,22,-1,3, dna);
         DrawLineWithMarkers(12,24,1,5, dna);
+
+        RendertRNA(19,44);
+        RendertRNA(41,44);
+        RendertRNA(63,44);
+        RendertRNA(85,44);
+        RendertRNA(107,44);
 
     }
 
