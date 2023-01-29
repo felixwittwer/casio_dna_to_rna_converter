@@ -51,6 +51,18 @@ void RendertRNA(int x, int y){
 
 }
 
+RenderPointer(int x, int y, int pointer, int render){
+    int xaddition;
+    xaddition = (pointer)*5+(7*((pointer)/3))+2;
+    if(render==1){
+        Bdisp_DrawLineVRAM(x+xaddition-1,y,x+xaddition+1,y);
+    }else if(render==0){
+        Bdisp_ClearLineVRAM(x+xaddition-1,y,x+xaddition+1,y);
+    }
+    
+
+}
+
 //****************************************************************************
 //  AddIn_main (Sample program main function)
 //
@@ -66,6 +78,7 @@ void RendertRNA(int x, int y){
 int AddIn_main(int isAppli, unsigned short OptionNum)
 {
     unsigned int key;
+    int pointer = -1;
     char dnaone [15] = "ATGTCGGTGCTGTAT";
     char dnatwo [15] = "";
     char mrna [15] = "";
@@ -75,6 +88,34 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 
     while(1){
         GetKey(&key);
+
+        RenderPointer(12, 11, pointer, 0);
+        
+        if(key==KEY_CHAR_1){
+            dnaone[pointer] = 'A';
+        }else if(key==KEY_CHAR_4){
+            dnaone[pointer] = 'T';
+        }else if(key==KEY_CHAR_3){
+            dnaone[pointer] = 'G';
+        }else if(key==KEY_CHAR_6){
+            dnaone[pointer] = 'C';
+        }
+
+        if(key==KEY_CTRL_RIGHT){
+            pointer = pointer + 1;
+        }else if(key==KEY_CTRL_LEFT){
+            pointer = pointer - 1;
+        }
+
+        if(pointer < 0){
+            pointer = 14;
+        }else if(pointer > 14){
+            pointer = 1;
+        }
+        
+        if(pointer != -1){
+            RenderPointer(12, 11, pointer, 1);
+        }
 
         RenderStrand(12,2,1,5, dnaone);
         RenderStrand(12,19,-1,3, dnatwo);

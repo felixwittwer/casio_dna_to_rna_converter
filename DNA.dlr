@@ -19,3 +19,8 @@ Flags=00001012
 File=C:\Users\Felix\Desktop\DNA\DNA.c
 Line=80
 Flags=00001012
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\DNA\DNA.c
+Line=108
+Flags=00001012
