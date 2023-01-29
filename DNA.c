@@ -78,7 +78,7 @@ RenderPointer(int x, int y, int pointer, int render){
 int AddIn_main(int isAppli, unsigned short OptionNum)
 {
     unsigned int key;
-    int pointer = -1;
+    int pointer = 1;
     char dnaone [15] = "ATGTCGGTGCTGTAT";
     char dnatwo [15] = "";
     char mrna [15] = "";
@@ -89,16 +89,16 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
     while(1){
         GetKey(&key);
 
-        RenderPointer(12, 11, pointer, 0);
+        RenderPointer(12, 11, pointer-1, 0);
         
         if(key==KEY_CHAR_1){
-            dnaone[pointer] = 'A';
+            dnaone[pointer-1] = 'T';
         }else if(key==KEY_CHAR_4){
-            dnaone[pointer] = 'T';
+            dnaone[pointer-1] = 'A';
         }else if(key==KEY_CHAR_3){
-            dnaone[pointer] = 'G';
+            dnaone[pointer-1] = 'C';
         }else if(key==KEY_CHAR_6){
-            dnaone[pointer] = 'C';
+            dnaone[pointer-1] = 'G';
         }
 
         if(key==KEY_CTRL_RIGHT){
@@ -107,14 +107,14 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
             pointer = pointer - 1;
         }
 
-        if(pointer < 0){
-            pointer = 14;
-        }else if(pointer > 14){
+        if(pointer < 1){
+            pointer = 15;
+        }else if(pointer > 15){
             pointer = 1;
         }
         
         if(pointer != -1){
-            RenderPointer(12, 11, pointer, 1);
+            RenderPointer(12, 11, pointer-1, 1);
         }
 
         RenderStrand(12,2,1,5, dnaone);
