@@ -68,6 +68,87 @@ RenderPointer(int x, int y, int pointer, int render){
     }
 }
 
+RenderResult(int x, int y, int pos1, int pos2, int pos3, char symbols[]){
+    if(symbols[pos1]=='A'){
+        if(symbols[pos2]=='U'){
+            if(symbols[pos3]=='G'){
+                PrintMini(x,y, (unsigned char*)"Met", MINI_OVER);
+            }else if(symbols[pos3]=='U'||symbols[pos3]=='C'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Ile ", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='C'){
+            PrintMini(x,y, (unsigned char*)"Thr ", MINI_OVER);
+        }else if(symbols[pos2]=='A'){
+            if(symbols[pos3]=='G'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Lys ", MINI_OVER);
+            }else if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Asn  ", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='G'){    
+            if(symbols[pos3]=='G'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Arg ", MINI_OVER);
+            }else if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Ser  ", MINI_OVER);
+            }
+        }
+
+    }else if(symbols[pos1]=='G'){
+        if(symbols[pos2]=='U'){
+            PrintMini(x,y, (unsigned char*)"Val ", MINI_OVER);
+        }else if(symbols[pos2]=='C'){
+            PrintMini(x,y, (unsigned char*)"Ala ", MINI_OVER);
+        }else if(symbols[pos2]=='A'){
+            if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Asp ", MINI_OVER);
+            }else if(symbols[pos3]=='G'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Glu ", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='G'){
+            PrintMini(x,y, (unsigned char*)"Gly ", MINI_OVER);
+        }
+
+    }else if(symbols[pos1]=='U'){
+        if(symbols[pos2]=='U'){
+            if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Phe ", MINI_OVER);
+            }else if(symbols[pos3]=='G'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Leu ", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='C'){
+            PrintMini(x,y, (unsigned char*)"Ser ", MINI_OVER);
+        }else if(symbols[pos2]=='A'){
+            if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Tyr ", MINI_OVER);
+            }else if(symbols[pos3]=='A'||symbols[pos3]=='G'){
+                PrintMini(x,y, (unsigned char*)"Stop", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='G'){
+            if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"Cys ", MINI_OVER);
+            }else if(symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Stop", MINI_OVER);
+            }else if(symbols[pos3]=='G'){
+                PrintMini(x,y, (unsigned char*)"Trp", MINI_OVER);
+            }
+        }
+
+    }else if(symbols[pos1]=='C'){
+        if(symbols[pos2]=='U'){
+            PrintMini(x,y, (unsigned char*)"Leu ", MINI_OVER);
+        }else if(symbols[pos2]=='C'){
+            PrintMini(x,y, (unsigned char*)"Pro ", MINI_OVER);
+        }else if(symbols[pos2]=='A'){
+            if(symbols[pos3]=='U'||symbols[pos3]=='C'){
+                PrintMini(x,y, (unsigned char*)"His ", MINI_OVER);
+            }else if(symbols[pos3]=='G'||symbols[pos3]=='A'){
+                PrintMini(x,y, (unsigned char*)"Gln ", MINI_OVER);
+            }
+        }else if(symbols[pos2]=='G'){
+            PrintMini(x,y, (unsigned char*)"Arg ", MINI_OVER);
+        }
+    }
+}
+
 //****************************************************************************
 //  AddIn_main (Sample program main function)
 //
@@ -85,7 +166,7 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
     unsigned int key;
     int iteration = 0;
     int pointer = 1;
-    char dnaone [15] = "ATGTCGGTGCTGTAT";
+    char dnaone [15] = "ATGACTGTGCTGTAT";
     char dnatwo [15] = "";
     char mrna [15] = "";
     char trna [15] = "";
@@ -175,6 +256,12 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
         RendertRNA(63,38);
         RendertRNA(85,38);
         RendertRNA(107,38);
+
+        RenderResult(13,43,0,1,2,mrna);
+        RenderResult(35,43,3,4,5,mrna);
+        RenderResult(57,43,6,7,8,mrna);
+        RenderResult(79,43,9,10,11,mrna);
+        RenderResult(101,43,12,13,14,mrna);
 
     }
 
