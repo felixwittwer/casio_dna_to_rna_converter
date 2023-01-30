@@ -2,19 +2,19 @@
 
 [_1]
 Type=5
-Order=1
+Order=0
 Top=15
 Left=2235
 Height=4740
 Width=5565
 State=0
 Flags=00000020
-Setting=110:1:DNA.c
+Setting=63:1:DNA.c
 OptionA=0
 
 [_2]
 Type=1
-Order=2
+Order=1
 Top=15
 Left=7800
 Height=4800
@@ -92,7 +92,7 @@ OptionA=0
 
 [_9]
 Type=15
-Order=0
+Order=2
 Top=11130
 Left=45
 Height=8370
@@ -110,5 +110,5 @@ Height=19635
 Width=12045
 State=0
 Flags=00000020
-Setting=109:1:DNA.c
+Setting=177:28:DNA.c
 OptionA=0

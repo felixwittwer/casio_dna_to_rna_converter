@@ -4,6 +4,7 @@
 File=C:\Users\Felix\Desktop\DNA\DNA.c
 Line=42
 Flags=00001012
+Sublevel=1
 
 [Breakpoint]
 File=C:\Users\Felix\Desktop\DNA\DNA.c
@@ -24,3 +25,26 @@ Flags=00001012
 File=C:\Users\Felix\Desktop\DNA\DNA.c
 Line=108
 Flags=00001012
+Sublevel=1
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\DNA\DNA.c
+Line=57
+Flags=00001012
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\DNA\DNA.c
+Line=108
+Flags=00001012
+Sublevel=2
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\DNA\DNA.c
+Line=62
+Flags=00001012
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\DNA\DNA.c
+Line=42
+Flags=00001012
+Sublevel=2
