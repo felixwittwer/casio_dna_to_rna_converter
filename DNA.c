@@ -128,7 +128,7 @@ RenderResult(int x, int y, int pos1, int pos2, int pos3, char symbols[]){
             }else if(symbols[pos3]=='A'){
                 PrintMini(x,y, (unsigned char*)"Stop", MINI_OVER);
             }else if(symbols[pos3]=='G'){
-                PrintMini(x,y, (unsigned char*)"Trp", MINI_OVER);
+                PrintMini(x,y, (unsigned char*)"Trp ", MINI_OVER);
             }
         }
 
@@ -146,6 +146,8 @@ RenderResult(int x, int y, int pos1, int pos2, int pos3, char symbols[]){
         }else if(symbols[pos2]=='G'){
             PrintMini(x,y, (unsigned char*)"Arg ", MINI_OVER);
         }
+    }else if(symbols[pos1]==' '||symbols[pos2]==' '||symbols[pos3]==' '){
+        PrintMini(x,y, (unsigned char*)"    ", MINI_OVER);
     }
 }
 
