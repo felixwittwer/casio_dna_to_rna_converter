@@ -1,6 +1,21 @@
 # casio_dna_to_rna_converter ![DNATORNA icon](MainIcon.bmp)
 converts parts of DNA to m-RNA and t-RNA
 
+## Installation
+
+Connect Casio fx-9860 GIII or GII to your Computer with the help of the USB cable.<br>
+Press [F1]<br>
+<br>
+Open the file manager of your operating system and insert the QUADGEN.G1A file into <br>
+the shown device (usually D:).<br>
+<br>
+Eject device (usually D:). More info on calculator display.<br>
+<br>
+Press [EXE] as shown on the screen.<br>
+Press [EXIT] as shown on the screen.<br>
+Press [MENU] as shown on the screen.<br>
+<br>
+
 # Use
 to modify the first DNA strand use
 
@@ -13,3 +28,5 @@ to modify the first DNA strand use
 <br>
 [LEFT] go one to the left<br>
 [RIGHT] go one to the right<br>
+
+![Main menu](Main.bmp)
