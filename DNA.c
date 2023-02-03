@@ -175,8 +175,14 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
 
     Bdisp_AllClr_DDVRAM();
 
+    PrintMini(10,10,(unsigned char*)"Performance Edition",MINI_OVER);
+    PrintMini(10,20,(unsigned char*)"V 1.00.00",MINI_OVER);
+    PrintMini(10,30,(unsigned char*)"(c) 2023 Felix Wittwer",MINI_OVER);
+    PrintMini(10,57,(unsigned char*)"Press any key to continue >>>",MINI_OVER);
+
     while(1){
         GetKey(&key);
+        Bdisp_AllClr_DDVRAM();
 
         //clear last pointer
         RenderPointer(12, 11, pointer-1, 0);
