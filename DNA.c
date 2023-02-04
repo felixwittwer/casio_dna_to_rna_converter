@@ -58,6 +58,20 @@ void RendertRNA(int x, int y){
     Bdisp_DrawLineVRAM(x-5,y+1,x+5,y+1);
 }
 
+void RendertRNAS(int x, int y, char mrna[]){
+    RendertRNA(x,y);
+    RendertRNA(x+22,y);
+    RendertRNA(x+44,y);
+    RendertRNA(x+66,y);
+    RendertRNA(x+88,y);
+
+    RenderResult(x-6,y+5,0,1,2,mrna);
+    RenderResult(x+16,y+5,3,4,5,mrna);
+    RenderResult(x+38,y+5,6,7,8,mrna);
+    RenderResult(x+60,y+5,9,10,11,mrna);
+    RenderResult(x+82,y+5,12,13,14,mrna);
+}
+
 RenderPointer(int x, int y, int pointer, int render){
     int xaddition;
     xaddition = (pointer)*5+(7*((pointer)/3))+2;
@@ -66,6 +80,26 @@ RenderPointer(int x, int y, int pointer, int render){
     }else if(render==0){
         Bdisp_ClearLineVRAM(x+xaddition-1,y,x+xaddition+1,y);
     }
+}
+
+void Render_F_Button(int x, int y, unsigned char *str){
+    Bdisp_DrawLineVRAM(x, y-1, x+17, y-1);
+    Bdisp_DrawLineVRAM(x-1, y-1, x-1, y+5);
+    Bdisp_DrawLineVRAM(x+17, y-1, x+17, y+5);
+    Bdisp_DrawLineVRAM(x+16, y-1, x+16, y+5);
+    PrintMini(x,y, str, MINI_REV);
+
+    Bdisp_ClearLineVRAM(x+17, y+4, x+15, y+6);
+    Bdisp_ClearLineVRAM(x+17, y+5, x+16, y+6);
+    Bdisp_SetPoint_VRAM(x+17, y+6, 0);
+}
+
+void Render_Buttons(){
+    Render_F_Button(24,58, "ALL ");
+    Render_F_Button(45,58, "D>D ");
+    Render_F_Button(66,58, "M>T ");
+    Render_F_Button(87,58, "HELP");
+    // Render_F_Button(110,58, "HELP");
 }
 
 RenderResult(int x, int y, int pos1, int pos2, int pos3, char symbols[]){
@@ -168,108 +202,271 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
     unsigned int key;
     int iteration = 0;
     int pointer = 1;
-    char dnaone [15] = "ATGACTGTGCTGTAT";
+    char dnaone [15] = "ATG";
     char dnatwo [15] = "";
-    char mrna [15] = "";
+    char mrna [15] = "AUG";
     char trna [15] = "";
 
     Bdisp_AllClr_DDVRAM();
 
-    PrintMini(10,10,(unsigned char*)"Performance Edition",MINI_OVER);
+    PrintMini(10,10,(unsigned char*)"Professional Edition",MINI_OVER);
     PrintMini(10,20,(unsigned char*)"V 1.00.00",MINI_OVER);
     PrintMini(10,30,(unsigned char*)"(c) 2023 Felix Wittwer",MINI_OVER);
-    PrintMini(10,57,(unsigned char*)"Press any key to continue >>>",MINI_OVER);
+    Render_Buttons();
 
     while(1){
         GetKey(&key);
-        Bdisp_AllClr_DDVRAM();
+        if(key==KEY_CTRL_F2||key==KEY_CTRL_F3||key==KEY_CTRL_F4||key==KEY_CTRL_F5){
+            break;
+        }
+    }
 
-        //clear last pointer
-        RenderPointer(12, 11, pointer-1, 0);
+    while(1){
+        // GetKey(&key);
+        if(key==KEY_CTRL_F3){
+            Bdisp_AllClr_DDVRAM();
+            RenderStrand(12,2,1,5, dnaone,1);
+            RenderStrand(12,20,-1,3, dnatwo,1);
+            Render_Buttons();
+            while(1){
+                GetKey(&key);
+                //clear last pointer
+                RenderPointer(12, 11, pointer-1, 0);
+                Render_Buttons();
+                
+                if(key==KEY_CTRL_F2||key==KEY_CTRL_F3||key==KEY_CTRL_F4||key==KEY_CTRL_F5){
+                    break;
+                }
+
+                //input for first DNA strand
+                if(key==KEY_CHAR_1){
+                    dnaone[pointer-1] = 'T';
+                }else if(key==KEY_CHAR_4){
+                    dnaone[pointer-1] = 'A';
+                }else if(key==KEY_CHAR_3){
+                    dnaone[pointer-1] = 'C';
+                }else if(key==KEY_CHAR_6){
+                    dnaone[pointer-1] = 'G';
+                }else if(key==KEY_CTRL_DEL){
+                    dnaone[pointer-1] = ' ';
+                }
+
+                while(iteration<15){
+                    if(dnaone[iteration]=='T'){
+                        dnatwo[iteration]='A';
+                    }else if(dnaone[iteration]=='A'){
+                        dnatwo[iteration]='T';
+                    }else if(dnaone[iteration]=='G'){
+                        dnatwo[iteration]='C';
+                    }else if(dnaone[iteration]=='C'){
+                        dnatwo[iteration]='G';
+                    }else if(dnaone[iteration]==' '){
+                        dnatwo[iteration]=' ';
+                    }
+                    iteration = iteration + 1;
+                }
+                iteration = 0;
+
+                //if strand changed pointer + 1
+                if(key==KEY_CHAR_1||key==KEY_CHAR_3||key==KEY_CHAR_4||key==KEY_CHAR_6){
+                    pointer = pointer + 1;
+                }
+
+                //move pointer with arrowkeys
+                if(key==KEY_CTRL_RIGHT){
+                    pointer = pointer + 1;
+                }else if(key==KEY_CTRL_LEFT){
+                    pointer = pointer - 1;
+                }
+
+                //dont move pointer out of range
+                if(pointer < 1){
+                    pointer = 15;
+                }else if(pointer > 15){
+                    pointer = 1;
+                }
+                
+                RenderPointer(12, 11, pointer-1, 1);
+
+                //display strands
+                RenderStrand(12,2,1,5, dnaone,1);
+                RenderStrand(12,20,-1,3, dnatwo,1);
+
+                RenderPointer(12, 11, pointer-1, 1);
+            }
+        }
+
+
+        if(key==KEY_CTRL_F2){
+            Bdisp_AllClr_DDVRAM();
+            //initialise
+            RenderStrand(12,2,1,5, dnaone,1);
+            RenderStrand(12,20,-1,3, dnatwo,1);
+            RenderStrand(12,22,1,5, mrna,1);
+            RenderStrand(12,29,1,5, trna,0);
+            RendertRNAS(19,38, mrna);
+            Render_Buttons();
+
+            while(1){
+                GetKey(&key);
+                //clear last pointer
+                RenderPointer(12, 11, pointer-1, 0);
+                Render_Buttons();
+
+                if(key==KEY_CTRL_F2||key==KEY_CTRL_F3||key==KEY_CTRL_F4||key==KEY_CTRL_F5){
+                    break;
+                }
+                
+                //input for first DNA strand
+                if(key==KEY_CHAR_1){
+                    dnaone[pointer-1] = 'T';
+                }else if(key==KEY_CHAR_4){
+                    dnaone[pointer-1] = 'A';
+                }else if(key==KEY_CHAR_3){
+                    dnaone[pointer-1] = 'C';
+                }else if(key==KEY_CHAR_6){
+                    dnaone[pointer-1] = 'G';
+                }else if(key==KEY_CTRL_DEL){
+                    dnaone[pointer-1] = ' ';
+                }
+
+                while(iteration<15){
+                    if(dnaone[iteration]=='T'){
+                        dnatwo[iteration]='A';
+                    }else if(dnaone[iteration]=='A'){
+                        dnatwo[iteration]='T';
+                    }else if(dnaone[iteration]=='G'){
+                        dnatwo[iteration]='C';
+                    }else if(dnaone[iteration]=='C'){
+                        dnatwo[iteration]='G';
+                    }else if(dnaone[iteration]==' '){
+                        dnatwo[iteration]=' ';
+                    }
+
+                    //copy dnaone to mrna
+                    if(dnaone[iteration] != 'T'){
+                        mrna[iteration] = dnaone[iteration];
+                    }else if(dnaone[iteration]=='T'){
+                        mrna[iteration] = 'U';
+                    }
+
+                    if(dnatwo[iteration] != 'T'){
+                        trna[iteration] = dnatwo[iteration];
+                    }else if(dnatwo[iteration]=='T'){
+                        trna[iteration] = 'U';
+                    }
+                    iteration = iteration + 1;
+                }
+                iteration = 0;
+
+                //if strand changed pointer + 1
+                if(key==KEY_CHAR_1||key==KEY_CHAR_3||key==KEY_CHAR_4||key==KEY_CHAR_6){
+                    pointer = pointer + 1;
+                }
+
+                //move pointer with arrowkeys
+                if(key==KEY_CTRL_RIGHT){
+                    pointer = pointer + 1;
+                }else if(key==KEY_CTRL_LEFT){
+                    pointer = pointer - 1;
+                }
+
+                //dont move pointer out of range
+                if(pointer < 1){
+                    pointer = 15;
+                }else if(pointer > 15){
+                    pointer = 1;
+                }
+                
+                RenderPointer(12, 11, pointer-1, 1);
+
+                //display strands
+                RenderStrand(12,2,1,5, dnaone,1);
+                RenderStrand(12,20,-1,3, dnatwo,1);
+                RenderStrand(12,22,1,5, mrna,1);
+                RenderStrand(12,29,1,5, trna,0);
+
+                RenderPointer(12, 11, pointer-1, 1);
+
+                //displa tRNA
+                RendertRNAS(19,38,mrna);
+            }
+        }
+
+        if(key==KEY_CTRL_F4){
+            //initialise
+            int pointer = 1;
+            Bdisp_AllClr_DDVRAM();
+            Render_Buttons();
+            RenderStrand(12,2,1,5, mrna,1);
+            RenderStrand(12,10,1,5, trna,0);
+            RendertRNAS(19,19,mrna);
+
+            while(1){
+                GetKey(&key);
+                RenderPointer(12, 11, pointer-1, 0);
+                Render_Buttons();
+
+                if(key==KEY_CTRL_F2||key==KEY_CTRL_F3||key==KEY_CTRL_F4||key==KEY_CTRL_F5){
+                    break;
+                }
+
+                if(key==KEY_CHAR_1){
+                    mrna[pointer-1] = 'U';
+                }else if(key==KEY_CHAR_4){
+                    mrna[pointer-1] = 'A';
+                }else if(key==KEY_CHAR_3){
+                    mrna[pointer-1] = 'C';
+                }else if(key==KEY_CHAR_6){
+                    mrna[pointer-1] = 'G';
+                }else if(key==KEY_CTRL_DEL){
+                    mrna[pointer-1] = ' ';
+                }
+
+                while(iteration<15){
+                    if(mrna[iteration]=='U'){
+                        trna[iteration]='A';
+                    }else if(mrna[iteration]=='A'){
+                        trna[iteration]='U';
+                    }else if(mrna[iteration]=='G'){
+                        trna[iteration]='C';
+                    }else if(mrna[iteration]=='C'){
+                        trna[iteration]='G';
+                    }else if(mrna[iteration]==' '){
+                        trna[iteration]=' ';
+                    }
+                iteration = iteration + 1;
+                }  
+                iteration = 0;
+
+                //if strand changed pointer + 1
+                if(key==KEY_CHAR_1||key==KEY_CHAR_3||key==KEY_CHAR_4||key==KEY_CHAR_6){
+                    pointer = pointer + 1;
+                }
+
+                //move pointer with arrowkeys
+                if(key==KEY_CTRL_RIGHT){
+                    pointer = pointer + 1;
+                }else if(key==KEY_CTRL_LEFT){
+                    pointer = pointer - 1;
+                }
+
+                //dont move pointer out of range
+                if(pointer < 1){
+                    pointer = 15;
+                }else if(pointer > 15){
+                    pointer = 1;
+                }
         
-        //input for first DNA strand
-        if(key==KEY_CHAR_1){
-            dnaone[pointer-1] = 'T';
-        }else if(key==KEY_CHAR_4){
-            dnaone[pointer-1] = 'A';
-        }else if(key==KEY_CHAR_3){
-            dnaone[pointer-1] = 'C';
-        }else if(key==KEY_CHAR_6){
-            dnaone[pointer-1] = 'G';
-        }else if(key==KEY_CTRL_DEL){
-            dnaone[pointer-1] = ' ';
-        }
+                RenderPointer(12, 11, pointer-1, 1);
 
-        while(iteration<15){
-            if(dnaone[iteration]=='T'){
-                dnatwo[iteration]='A';
-            }else if(dnaone[iteration]=='A'){
-                dnatwo[iteration]='T';
-            }else if(dnaone[iteration]=='G'){
-                dnatwo[iteration]='C';
-            }else if(dnaone[iteration]=='C'){
-                dnatwo[iteration]='G';
-            }else if(dnaone[iteration]==' '){
-                dnatwo[iteration]=' ';
+                RenderStrand(12,2,1,5, mrna,1);
+                RenderStrand(12,10,1,5, trna,0);
+
+                //displa tRNA
+                RendertRNAS(19,19,mrna);
             }
-
-            //copy dnaone to mrna
-            if(dnaone[iteration] != 'T'){
-                mrna[iteration] = dnaone[iteration];
-            }else if(dnaone[iteration]=='T'){
-                mrna[iteration] = 'U';
-            }
-
-            if(dnatwo[iteration] != 'T'){
-                trna[iteration] = dnatwo[iteration];
-            }else if(dnatwo[iteration]=='T'){
-                trna[iteration] = 'U';
-            }
-            iteration = iteration + 1;
         }
-        iteration = 0;
-
-        //if strand changed pointer + 1
-        if(key==KEY_CHAR_1||key==KEY_CHAR_3||key==KEY_CHAR_4||key==KEY_CHAR_6){
-            pointer = pointer + 1;
-        }
-
-        //move pointer with arrowkeys
-        if(key==KEY_CTRL_RIGHT){
-            pointer = pointer + 1;
-        }else if(key==KEY_CTRL_LEFT){
-            pointer = pointer - 1;
-        }
-
-        //dont move pointer out of range
-        if(pointer < 1){
-            pointer = 15;
-        }else if(pointer > 15){
-            pointer = 1;
-        }
-        
-        RenderPointer(12, 11, pointer-1, 1);
-
-        //display strands
-        RenderStrand(12,2,1,5, dnaone,1);
-        RenderStrand(12,20,-1,3, dnatwo,1);
-        RenderStrand(12,22,1,5, mrna,1);
-        RenderStrand(12,29,1,5, trna,0);
-
-        RenderPointer(12, 11, pointer-1, 1);
-
-        //displa tRNA
-        RendertRNA(19,38);
-        RendertRNA(41,38);
-        RendertRNA(63,38);
-        RendertRNA(85,38);
-        RendertRNA(107,38);
-
-        RenderResult(13,43,0,1,2,mrna);
-        RenderResult(35,43,3,4,5,mrna);
-        RenderResult(57,43,6,7,8,mrna);
-        RenderResult(79,43,9,10,11,mrna);
-        RenderResult(101,43,12,13,14,mrna);
 
     }
 
