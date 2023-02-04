@@ -1,50 +1,74 @@
 [DLSimRunSpace]
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=42
 Flags=00001012
 Sublevel=1
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=64
 Flags=00001012
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=75
 Flags=00001012
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=80
 Flags=00001012
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=108
 Flags=00001012
 Sublevel=1
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=57
 Flags=00001012
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=108
 Flags=00001012
 Sublevel=2
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=62
 Flags=00001012
 
 [Breakpoint]
-File=C:\Users\Felix\Desktop\DNA\DNA.c
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
 Line=42
+Flags=00001012
+Sublevel=2
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
+Line=260
+Flags=00001012
+Sublevel=1
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
+Line=242
+Flags=00001012
+Sublevel=1
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
+Line=260
+Flags=00001012
+Sublevel=2
+
+[Breakpoint]
+File=C:\Users\Felix\Desktop\casio_dna_to_rna_converter\DNA.c
+Line=242
 Flags=00001012
 Sublevel=2

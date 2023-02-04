@@ -2,19 +2,19 @@
 
 [_1]
 Type=5
-Order=1
+Order=0
 Top=15
 Left=2235
 Height=4740
 Width=5565
 State=0
 Flags=00000020
-Setting=226:1:DNA.c
+Setting=261:1:DNA.c
 OptionA=0
 
 [_2]
 Type=1
-Order=3
+Order=1
 Top=15
 Left=7800
 Height=4800
@@ -26,7 +26,7 @@ OptionB=15
 
 [_3]
 Type=6
-Order=2
+Order=4
 Top=4740
 Left=7800
 Height=6390
@@ -37,7 +37,7 @@ OptionA=0
 
 [_4]
 Type=7
-Order=5
+Order=7
 Top=4740
 Left=2220
 Height=3165
@@ -48,7 +48,7 @@ OptionA=0
 
 [_5]
 Type=8
-Order=4
+Order=5
 Top=7905
 Left=2220
 Height=3225
@@ -81,7 +81,7 @@ OptionA=0
 
 [_8]
 Type=17
-Order=7
+Order=6
 Top=15
 Left=-15
 Height=11115
@@ -92,23 +92,23 @@ OptionA=0
 
 [_9]
 Type=15
-Order=0
+Order=2
 Top=11130
 Left=45
 Height=8370
-Width=12780
+Width=13485
 State=0
 Flags=00000000
 OptionA=0
 
 [_32]
 Type=16
-Order=6
+Order=3
 Top=15
 Left=13440
 Height=19635
-Width=12270
+Width=12045
 State=0
 Flags=00000020
-Setting=144:1:DNA.c
+Setting=261:1:DNA.c
 OptionA=0
