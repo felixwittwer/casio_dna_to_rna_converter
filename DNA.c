@@ -207,7 +207,8 @@ int AddIn_main(int isAppli, unsigned short OptionNum)
                 dnaone[pointer-1] = 'C';
             }
         }else if(key==KEY_CTRL_DEL){
-            dnaone[pointer-1] = ' ';
+            dnaone[pointer-2] = ' ';
+            pointer=pointer-1;
         }
 
         while(iteration<15){
